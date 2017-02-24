@@ -43,6 +43,6 @@ public class MainActivity extends AppCompatActivity {
         return BitmapFactory.decodeResource(getResources(), resource, options);
     }
 
+    public native void nativeBlur(String cacheDir, int X, int Y, Bitmap in, Bitmap out);
     public native void nativeMono(String cacheDir, int X, int Y, Bitmap in, Bitmap out);
-
 }

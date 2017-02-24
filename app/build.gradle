@@ -37,7 +37,12 @@ android {
 
     sourceSets {
         main {
-            jniLibs.srcDirs = [rs_root]
+            // for using librs from NDK
+            // jniLibs.srcDirs = [rs_root]
+
+            // for using custom rs kernels
+            jniLibs.srcDirs = ['./libs/mono_rs_wrapper/libs']
+
             renderscript.srcDirs = ['src']
         }
     }
