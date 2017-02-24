@@ -54,18 +54,24 @@ target_link_libraries( # Specifies the target library.
 # find RenderScript Library
 ###########################
 
+if(${ANDROID_ABI} STREQUAL "armeabi-v7a")
+    set(ANDROID_ABI_CONVERTED arm)
+else()
+    set(ANDROID_ABI_CONVERTED ${ANDROID_ABI})
+endif()
+
 add_library(LIB_RSCPP_STATIC STATIC IMPORTED)
 set_target_properties(LIB_RSCPP_STATIC PROPERTIES IMPORTED_LOCATION
-    ${LIBRS_ROOT}/${ANDROID_ABI}/libRScpp_static.a)
+    ${LIBRS_ROOT}/${ANDROID_ABI_CONVERTED}/libRScpp_static.a)
 
 add_library(LIB_RSSUPPORT SHARED IMPORTED)
 set_target_properties(LIB_RSSUPPORT PROPERTIES IMPORTED_LOCATION
-    ${LIBRS_ROOT}/${ANDROID_ABI}/libRSSupport.so)
+    ${LIBRS_ROOT}/${ANDROID_ABI_CONVERTED}/libRSSupport.so)
 
 
 add_library(LIB_BLASV8 SHARED IMPORTED)
 set_target_properties(LIB_BLASV8 PROPERTIES IMPORTED_LOCATION
-    ${LIBRS_ROOT}/${ANDROID_ABI}/libblasV8.so)
+    ${LIBRS_ROOT}/${ANDROID_ABI_CONVERTED}/libblasV8.so)
 
 
 target_include_directories(native-lib-rs PRIVATE

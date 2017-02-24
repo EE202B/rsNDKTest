@@ -2,10 +2,9 @@
 Enable calling RenderScript in NDK. Build with Gradle + CMake in Android Studio. **Currently only support running Intrinsic Scripts.**
 
 ## Notice
- * Download the latest r14-beta-2 version of NDK from [NDK Wiki](https://github.com/android-ndk/ndk/wiki)
- * Edit the `ndk.dir` in `local.properties` to the directory of the new downloaded NDK
+ * Update NDk to the latest r14-beta-2 version or higher.
  * Edit the `rs_root` according to your machine (TODO: remove this)
- * Change the name of the `rs_root/arm` folder in NDK to `armeabi-v7a` (TODO: remove this)
+ * Copy the `rs_root/arm` folder into the same directory as `rs_root/armeabi-v7a` if you want to target to armeabi-v7a(same as other arch). This is because jniLibs.srcDirs cannot link to folder named `arm`. (TODO: Remove this)
  * Include header `<cpp/RenderScript.h>`. Then you can add your `ScriptIntrinsic` in your jni cpp.
  
 ## Issue
