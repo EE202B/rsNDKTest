@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 
+def rs_root = android.ndkDirectory.toString() + '/toolchains/renderscript/prebuilt/darwin-x86_64/platform'
+
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
@@ -13,11 +15,12 @@ android {
         externalNativeBuild {
             cmake {
                 cppFlags "-frtti -fexceptions"
+                arguments "-DLIBRS_ROOT=${rs_root}"
             }
         }
 
         ndk {
-            abiFilters 'x86'
+            abiFilters 'x86', 'armeabi-v7a'
         }
 
         renderscriptTargetApi 24
@@ -34,8 +37,7 @@ android {
 
     sourceSets {
         main {
-            // let gradle pack the shared library into apk
-            jniLibs.srcDirs = ['./libs/renderscript/prebuilt/darwin-x86_64/platform']
+            jniLibs.srcDirs = [rs_root]
             renderscript.srcDirs = ['src']
         }
     }

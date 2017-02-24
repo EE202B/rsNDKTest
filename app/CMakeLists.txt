@@ -53,23 +53,15 @@ target_link_libraries( # Specifies the target library.
 ###########################
 # find RenderScript Library
 ###########################
-set(LIBRS_ROOT ${CMAKE_SOURCE_DIR}/./libs/renderscript/prebuilt/darwin-x86_64/platform)
 
 add_library(LIB_RSCPP_STATIC STATIC IMPORTED)
 set_target_properties(LIB_RSCPP_STATIC PROPERTIES IMPORTED_LOCATION
     ${LIBRS_ROOT}/${ANDROID_ABI}/libRScpp_static.a)
 
-add_library(LIB_COMPILER_RT STATIC IMPORTED)
-set_target_properties(LIB_COMPILER_RT PROPERTIES IMPORTED_LOCATION
-    ${LIBRS_ROOT}/${ANDROID_ABI}/libcompiler_rt.a)
-
 add_library(LIB_RSSUPPORT SHARED IMPORTED)
 set_target_properties(LIB_RSSUPPORT PROPERTIES IMPORTED_LOCATION
     ${LIBRS_ROOT}/${ANDROID_ABI}/libRSSupport.so)
 
-add_library(LIB_RSSUPPORTIO SHARED IMPORTED)
-set_target_properties(LIB_RSSUPPORTIO PROPERTIES IMPORTED_LOCATION
-    ${LIBRS_ROOT}/${ANDROID_ABI}/libRSSupportIO.so)
 
 add_library(LIB_BLASV8 SHARED IMPORTED)
 set_target_properties(LIB_BLASV8 PROPERTIES IMPORTED_LOCATION
@@ -81,8 +73,6 @@ target_include_directories(native-lib-rs PRIVATE
 
 target_link_libraries(native-lib-rs
                       LIB_RSCPP_STATIC
-                      LIB_COMPILER_RT
                       LIB_RSSUPPORT
-                      LIB_RSSUPPORTIO
                       LIB_BLASV8)
 
