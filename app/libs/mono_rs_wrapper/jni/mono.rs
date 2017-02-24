@@ -15,7 +15,7 @@
  */
 
 #pragma version(1)
-#pragma rs java_package_name(com.yingnanwang.cmakerstest)
+#pragma rs java_package_name(com.yingnanwang.cmakerstest.MainActivity)
 
 const static float3 gMonoMult = {0.299f, 0.587f, 0.114f};
 
