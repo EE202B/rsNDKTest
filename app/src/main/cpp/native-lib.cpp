@@ -4,7 +4,6 @@
 #include <android/bitmap.h>
 
 #include <cpp/RenderScript.h>
-#include "ScriptC_mono.h"
 
 #define  LOG_TAG    "native-lib-rs"
 #define  LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG_TAG,__VA_ARGS__)
@@ -50,11 +49,12 @@ Java_com_yingnanwang_cmakerstest_MainActivity_nativeMono(JNIEnv * env,
 
     inputAlloc->copy2DRangeFrom(0, 0, X, Y, inputPtr);
 
-    ScriptC_mono* sc = new ScriptC_mono(rs);
-    sc->forEach_root(inputAlloc, outputAlloc);
+    auto blurScript = ScriptIntrinsicBlur::create(rs, e);
+    blurScript->setRadius(15);
+    blurScript->setInput(inputAlloc);
+    blurScript->forEach(outputAlloc);
 
     outputAlloc->copy2DRangeTo(0, 0, X, Y, outputPtr);
-
 
     AndroidBitmap_unlockPixels(env, jbitmapIn);
     AndroidBitmap_unlockPixels(env, jbitmapOut);
