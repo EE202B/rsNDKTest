@@ -2,6 +2,7 @@ package com.yingnanwang.cmakerstest;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import android.graphics.BitmapFactory;
 import android.graphics.Bitmap;
@@ -12,15 +13,23 @@ public class MainActivity extends AppCompatActivity {
     private Bitmap mBitmapIn;
     private Bitmap mBitmapOut;
 
-    // Used to load the 'native-lib' library on application startup.
-    static {
-        System.loadLibrary("native-lib-rs");
+    public void loadNativeRsLib() {
+        try {
+            System.loadLibrary("native-lib-rs");
+        } catch (UnsatisfiedLinkError e) {
+            throw new RuntimeException(
+                    e.toString());
+
+        }
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        loadNativeRsLib();
 
         mBitmapIn = loadBitmap(R.drawable.data);
         mBitmapOut = Bitmap.createBitmap(mBitmapIn.getWidth(), mBitmapIn.getHeight(),

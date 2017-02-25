@@ -3,12 +3,12 @@ apply plugin: 'com.android.application'
 def rs_root = android.ndkDirectory.toString() + '/toolchains/renderscript/prebuilt/darwin-x86_64/platform'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 24
+    buildToolsVersion "24.0.1"
     defaultConfig {
         applicationId "com.yingnanwang.cmakerstest"
         minSdkVersion 23
-        targetSdkVersion 25
+        targetSdkVersion 24
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -21,11 +21,12 @@ android {
 
         ndk {
             abiFilters 'x86', 'armeabi-v7a'
+            moduleName "native-lib-rs"
         }
 
-        renderscriptTargetApi 24
-        renderscriptSupportModeEnabled true
-        renderscriptNdkModeEnabled true
+//        renderscriptTargetApi 24
+//        renderscriptSupportModeEnabled false
+//        renderscriptNdkModeEnabled false
     }
 
     buildTypes {
@@ -41,9 +42,7 @@ android {
             // jniLibs.srcDirs = [rs_root]
 
             // for using custom rs kernels
-            jniLibs.srcDirs = ['./libs/mono_rs_wrapper/libs']
-
-            renderscript.srcDirs = ['src']
+            jniLibs.srcDirs = ['./libs/mono_rs_wrapper/obj/local']
         }
     }
 
@@ -59,6 +58,6 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.2.0'
+    compile 'com.android.support:appcompat-v7:24.2.0'
     testCompile 'junit:junit:4.12'
 }

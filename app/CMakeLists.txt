@@ -99,19 +99,27 @@ set_target_properties(LIB_RSCPP_STATIC PROPERTIES IMPORTED_LOCATION
 
 add_library(LIB_RSSUPPORT SHARED IMPORTED)
 set_target_properties(LIB_RSSUPPORT PROPERTIES IMPORTED_LOCATION
-    ${CMAKE_SOURCE_DIR}/./libs/mono_rs_wrapper/libs/${ANDROID_ABI}/libRSSupport.so)
+    ${CMAKE_SOURCE_DIR}/./libs/mono_rs_wrapper/obj/local/${ANDROID_ABI}/libRSSupport.so)
 
 add_library(LIB_RSSUPPORTIO SHARED IMPORTED)
 set_target_properties(LIB_RSSUPPORTIO PROPERTIES IMPORTED_LOCATION
-    ${CMAKE_SOURCE_DIR}/./libs/mono_rs_wrapper/libs/${ANDROID_ABI}/libRSSupportIO.so)
+    ${CMAKE_SOURCE_DIR}/./libs/mono_rs_wrapper/obj/local/${ANDROID_ABI}/libRSSupportIO.so)
 
 add_library(LIB_BLASV8 SHARED IMPORTED)
 set_target_properties(LIB_BLASV8 PROPERTIES IMPORTED_LOCATION
-    ${CMAKE_SOURCE_DIR}/./libs/mono_rs_wrapper/libs/${ANDROID_ABI}/libblasV8.so)
+    ${CMAKE_SOURCE_DIR}/./libs/mono_rs_wrapper/obj/local/${ANDROID_ABI}/libblasV8.so)
 
-add_library(LIB_MONO_RS SHARED IMPORTED)
-set_target_properties(LIB_MONO_RS PROPERTIES IMPORTED_LOCATION
-    ${CMAKE_SOURCE_DIR}/./libs/mono_rs_wrapper/libs/${ANDROID_ABI}/libmono_rs_wrapper.so)
+add_library(LIB_MONO_RS_WRAPPER SHARED IMPORTED)
+set_target_properties(LIB_MONO_RS_WRAPPER PROPERTIES IMPORTED_LOCATION
+    ${CMAKE_SOURCE_DIR}/./libs/mono_rs_wrapper/obj/local/${ANDROID_ABI}/libmono_rs_wrapper.so)
+
+add_library(LIB_RS_MONO SHARED IMPORTED)
+set_target_properties(LIB_RS_MONO PROPERTIES IMPORTED_LOCATION
+    ${CMAKE_SOURCE_DIR}/./libs/mono_rs_wrapper/obj/local/${ANDROID_ABI}/librs.mono.so)
+
+add_library(LIB_STLPORT_SHARED SHARED IMPORTED)
+set_target_properties(LIB_STLPORT_SHARED PROPERTIES IMPORTED_LOCATION
+    ${CMAKE_SOURCE_DIR}/./libs/mono_rs_wrapper/obj/local/${ANDROID_ABI}/libstlport_shared.so)
 
 
 target_include_directories(native-lib-rs PRIVATE
@@ -124,5 +132,8 @@ target_link_libraries(native-lib-rs
                       LIB_RSSUPPORT
                       LIB_RSSUPPORTIO
                       LIB_BLASV8
-                      LIB_MONO_RS)
+                      LIB_STLPORT_SHARED
+                      LIB_MONO_RS_WRAPPER
+                      LIB_RS_MONO
+                      )
 
