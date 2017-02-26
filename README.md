@@ -1,4 +1,4 @@
-# RenderScript with NDK
+## RenderScript with NDK (deprecated, checkout [RenderScriptNDK](https://github.com/EE202B/RenderScriptNDK))
 Enable calling RenderScript in NDK. Build with Gradle + CMake in Android Studio. **Currently only support running Intrinsic Scripts.**
 
 ## Notice
